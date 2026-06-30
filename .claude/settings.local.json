@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/Scripts/python.exe --version)",
+      "Read(//d/05_PythonProject/python_code/**)",
+      "Bash(uv --version)",
+      "Bash(uv sync *)",
+      "Bash(uv run *)",
+      "Bash(curl -s http://localhost:8000/api/v1/albums/1)",
+      "Bash(curl -s http://localhost:18082/api/chat -X POST -H \"Content-Type: application/json\" -d '{\"sender_id\":\"1\",\"text\":\"你好\"}')",
+      "Bash(curl -s -X POST http://localhost:18082/api/chat -H \"Content-Type: application/json\" -d '{\"sender_id\":\"1\",\"text\":\"你好\"}')",
+      "Bash(uv run python -c ' *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:18082/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:18082/static/index.html)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill //PID 16564 //F)",
+      "Bash(curl -s http://localhost:8000/api/v1/orders/4)",
+      "Bash(curl -s -H \"X-User-Id: 1\" \"http://localhost:8000/api/v1/orders/4\")",
+      "Bash(curl *)",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d,indent=2,ensure_ascii=False\\)[:1500]\\)\")",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d,indent=2,ensure_ascii=False\\)[:800]\\)\")",
+      "Bash(taskkill *)",
+      "Bash(python -m json.tool)",
+      "Bash(python -c \"import sys; print\\(sys.stdin.read\\(\\)[:500]\\)\")",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(p\\) for p in sorted\\(d.get\\('paths',{}\\).keys\\(\\)\\)]\")",
+      "Bash(mysql *)",
+      "Bash(python -c ' *)",
+      "Read(//mnt/d/05_PythonProject/python_code/**)",
+      "Bash(python -c \"from audio_cs.task.action.customer.slot_extractor import extract_album_name; print\\('slot_extractor OK'\\)\")"
+    ]
+  }
+}

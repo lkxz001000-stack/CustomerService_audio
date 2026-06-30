@@ -1,0 +1,266 @@
+slots:
+  order_number:
+    type: text
+    label: 订单号
+    description: 用户的订单号
+
+  order_status:
+    type: text
+    label: 订单状态
+    description: 订单当前状态
+
+  order_summary:
+    type: text
+    label: 订单摘要
+    description: 订单内容摘要
+
+  album_title:
+    type: text
+    label: 专辑名称
+    description: 查询的专辑名称
+
+  track_title:
+    type: text
+    label: 章节名称
+    description: 最近收听的章节名称
+
+  position_seconds:
+    type: text
+    label: 播放进度
+    description: 收听进度位置
+
+  last_played_at:
+    type: text
+    label: 最后收听时间
+    description: 最近一次收听时间
+
+  refund_reason:
+    type: text
+    label: 退款原因
+    description: 申请退款的原因
+
+  refund_type:
+    type: text
+    label: 退款类型
+    description: 退款方式
+
+  ticket_type:
+    type: text
+    label: 工单类型
+    description: 工单问题类型
+
+  ticket_description:
+    type: text
+    label: 问题描述
+    description: 工单问题详细描述
+
+  ticket_number:
+    type: text
+    label: 工单编号
+    description: 创建的工单编号
+
+  album_name:
+    type: text
+    label: 作品名称
+    description: 要查询的专辑/有声书/广播剧名称
+
+  album_info:
+    type: text
+    label: 专辑详情
+    description: 专辑详情文本
+
+flows:
+  onboarding:
+    name: 欢迎引导
+    description: 在聊天窗口初次打开时欢迎用户，并介绍助手可处理的听书业务。
+    steps:
+      - id: start
+        type: start
+        next: respond
+
+      - id: respond
+        type: action
+        action: action_response
+        args:
+          text: "你好，这里是听书智能助手。我可以帮你查订单、查播放记录、申请退款，或者提交工单。有什么可以帮你的吗？"
+        next: end
+
+      - id: end
+        type: end
+        next: []
+
+  order_query:
+    name: 订单查询
+    description: 帮用户查询听书订单的当前状态、支付情况和购买内容。
+    steps:
+      - id: start
+        type: start
+        next: ask_order_number
+
+      - id: ask_order_number
+        type: collect
+        slot_name: order_number
+        response:
+          text: "请告诉我你的订单号。"
+        next: lookup_order
+
+      - id: lookup_order
+        type: action
+        action: action_query_order
+        next: show_order
+
+      - id: show_order
+        type: action
+        action: action_response
+        args:
+          text: "订单[{{ slots.order_number }}]当前状态是：[{{ slots.order_status }}]。\n{{ slots.order_summary }}"
+        next: end
+
+      - id: end
+        type: end
+        next: []
+
+  playback_query:
+    name: 播放记录查询
+    description: 帮用户查询最近的收听记录，包括专辑名、章节名、播放进度和收听时间。
+    steps:
+      - id: start
+        type: start
+        next: lookup_playback
+
+      - id: lookup_playback
+        type: action
+        action: action_query_playback
+        next: show_playback
+
+      - id: show_playback
+        type: action
+        action: action_response
+        args:
+          text: "{{ slots.album_title }}"
+        next: end
+
+      - id: end
+        type: end
+        next: []
+
+  refund_apply:
+    name: 退款申请
+    description: 帮用户提交听书订单的退款申请，收集订单号、退款原因和退款类型。
+    steps:
+      - id: start
+        type: start
+        next: ask_order_number
+
+      - id: ask_order_number
+        type: collect
+        slot_name: order_number
+        response:
+          text: "请告诉我你要退款的订单号。"
+        next: ask_refund_reason
+
+      - id: ask_refund_reason
+        type: collect
+        slot_name: refund_reason
+        response:
+          text: "请简单说一下退款原因。"
+        next: ask_refund_type
+
+      - id: ask_refund_type
+        type: collect
+        slot_name: refund_type
+        response:
+          text: "请选择退款方式：原路退回或退到钱包余额？"
+        next: submit_refund
+
+      - id: submit_refund
+        type: action
+        action: action_apply_refund
+        next: show_refund_result
+
+      - id: show_refund_result
+        type: action
+        action: action_response
+        args:
+          text: "好的，订单{{ slots.order_number }}的退款申请已提交，退款原因：{{ slots.refund_reason }}，退款方式：{{ slots.refund_type }}。我们会在1-3个工作日内处理。"
+        next: end
+
+      - id: end
+        type: end
+        next: []
+
+  ticket_submit:
+    name: 工单提交
+    description: 帮用户创建客服工单，收集工单类型、关联订单号和问题描述。
+    steps:
+      - id: start
+        type: start
+        next: ask_ticket_type
+
+      - id: ask_ticket_type
+        type: collect
+        slot_name: ticket_type
+        response:
+          text: "请选择问题类型：支付问题、账号问题、内容问题、功能反馈、版权投诉或其他？"
+        next: ask_order_number
+
+      - id: ask_order_number
+        type: collect
+        slot_name: order_number
+        response:
+          text: '请告诉我相关的订单号（如果没有可以输入"无"）。'
+        next: ask_description
+
+      - id: ask_description
+        type: collect
+        slot_name: ticket_description
+        response:
+          text: "请详细描述你遇到的问题。"
+        next: create_ticket
+
+      - id: create_ticket
+        type: action
+        action: action_submit_ticket
+        next: show_ticket_result
+
+      - id: show_ticket_result
+        type: action
+        action: action_response
+        args:
+          text: "工单已创建成功！工单编号：{{ slots.ticket_number }}。我们会在24小时内回复你，请留意消息通知。"
+        next: end
+
+      - id: end
+        type: end
+        next: []
+
+  album_detail_query:
+    name: 专辑详情查询
+    description: 帮用户查询有声书/广播剧/知识课程/播客等专辑的详细信息，包括章节数、主播、时长、评分和简介。
+    steps:
+      - id: start
+        type: start
+        next: ask_album_name
+
+      - id: ask_album_name
+        type: collect
+        slot_name: album_name
+        response:
+          text: "请告诉我你想了解哪部作品呢？"
+        next: lookup_album
+
+      - id: lookup_album
+        type: action
+        action: action_query_album_detail
+        next: show_album
+
+      - id: show_album
+        type: action
+        action: action_response
+        args:
+          text: "{{ slots.album_info }}"
+        next: end
+
+      - id: end
+        type: end
+        next: []
