@@ -37,7 +37,16 @@
       "Bash(python -m py_compile audio_cs/domain/messages.py)",
       "Bash(python -m py_compile audio_cs/api/schemas.py)",
       "Bash(python -m py_compile audio_cs/api/router/chat_router.py)",
-      "Bash(python -m py_compile audio_cs/engine/dialogue_engine.py)"
+      "Bash(python -m py_compile audio_cs/engine/dialogue_engine.py)",
+      "Bash(python -m py_compile audio_cs/plan/planner.py)",
+      "Bash(python3 *)",
+      "Bash(PYTHONIOENCODING=utf-8 uv run python -c ' *)",
+      "Bash(pkill -f \"audio_cs.main\")",
+      "Bash(pkill -f \"uvicorn\")",
+      "Bash(PYTHONIOENCODING=utf-8 uv run python -m audio_cs.main)",
+      "Bash(PYTHONIOENCODING=utf-8 uv run python -m evaluation.runner)",
+      "Bash(set PYTHONIOENCODING=utf-8)",
+      "Bash(start *)"
     ]
   }
 }

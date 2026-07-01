@@ -36,7 +36,7 @@ async def send_message(session: httpx.AsyncClient, sender_id: int, text: str) ->
 
 async def evaluate_all(cases: list[GoldenTestCase]) -> dict:
     """运行全部评估用例"""
-    async with httpx.AsyncClient(timeout=120.0) as session:
+    async with httpx.AsyncClient(timeout=120.0, trust_env=False) as session:
         # 每次评估前初始化新会话（通过不同 user_id 后缀）
         # 收集所有 turn 的预测和期望
         track_predictions: list[str] = []
@@ -233,7 +233,7 @@ async def main():
 
     # 先检查 API 是否可用
     try:
-        async with httpx.AsyncClient(timeout=5.0) as client:
+        async with httpx.AsyncClient(timeout=5.0, trust_env=False) as client:
             resp = await client.get(f"{API_BASE}/hello")
             resp.raise_for_status()
             print("✓ API 服务可用")

@@ -11,12 +11,14 @@
 """
 
 import json
+import asyncio
 import logging
 from typing import Any
 from dataclasses import asdict
 
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
+import httpx
 
 from audio_cs.plan.turn_plan import TurnPlan
 from audio_cs.domain.messages import UserMessage
@@ -181,9 +183,25 @@ class TurnPlanner:
         # 3. 构建链：模板 → LLM → JSON解析器（LangChain LCEL 管道语法）
         chain = prompt_template | llm_client | JsonOutputParser()
 
-        # 4. 执行链调用：原始输入依次经过三阶段处理，最终得到 dict
-        turn_plan_dict = await chain.ainvoke(prompt_inputs)
-        logger.debug("LLM 规划输出: %s", json.dumps(turn_plan_dict, ensure_ascii=False)[:200])
+        # 4. 执行链调用，带重试（处理 LLM API 限流）
+        last_error = None
+        for attempt in range(3):
+            try:
+                turn_plan_dict = await chain.ainvoke(prompt_inputs)
+                logger.debug("LLM 规划输出: %s", json.dumps(turn_plan_dict, ensure_ascii=False)[:200])
+                return TurnPlan.from_dict(turn_plan_dict)
+            except httpx.HTTPStatusError as e:
+                last_error = e
+                if e.response.status_code in (400, 429, 502, 503, 504):
+                    wait = 2 ** attempt
+                    logger.warning("LLM API 错误(attempt=%d, status=%d)，%ds 后重试",
+                                   attempt + 1, e.response.status_code, wait)
+                    await asyncio.sleep(wait)
+                else:
+                    raise
+            except Exception:
+                last_error = None  # 非 HTTP 错误不重试（如 JSON 解析失败）
+                raise
 
-        # 5. 将 LLM 输出的字典反序列化为类型安全的 TurnPlan 领域对象
-        return TurnPlan.from_dict(turn_plan_dict)
+        # 重试耗尽，抛出最后一个错误
+        raise last_error

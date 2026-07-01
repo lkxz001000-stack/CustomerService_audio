@@ -1,0 +1,5631 @@
+{
+  "summary": {
+    "total_cases": 200,
+    "total_turns": 254,
+    "errors": 0,
+    "track_accuracy": {
+      "metric": "track_accuracy",
+      "value": 0.9921,
+      "correct": 252,
+      "total": 254,
+      "errors": [
+        {
+          "idx": 48,
+          "predicted": "knowledge",
+          "expected": "task"
+        },
+        {
+          "idx": 215,
+          "predicted": "clarify",
+          "expected": "task"
+        }
+      ]
+    },
+    "intent_accuracy": {
+      "metric": "intent_accuracy",
+      "precision": 0.3327,
+      "recall": 0.3524,
+      "f1": 0.3423,
+      "total": 88
+    },
+    "slot_f1": {
+      "metric": "slot_f1",
+      "precision": 1.0,
+      "recall": 0.8256,
+      "f1": 0.9045,
+      "errors": [
+        {
+          "idx": 1,
+          "slot": "album_title",
+          "predicted": null,
+          "expected": "头牌过气后"
+        },
+        {
+          "idx": 7,
+          "slot": "album_title",
+          "predicted": null,
+          "expected": "斗罗大陆"
+        },
+        {
+          "idx": 8,
+          "slot": "album_title",
+          "predicted": null,
+          "expected": "三体"
+        },
+        {
+          "idx": 9,
+          "slot": "album_title",
+          "predicted": null,
+          "expected": "米小圈上学记11"
+        },
+        {
+          "idx": 10,
+          "slot": "album_title",
+          "predicted": null,
+          "expected": "头牌过气后第二季"
+        },
+        {
+          "idx": 11,
+          "slot": "album_title",
+          "predicted": null,
+          "expected": "剑来"
+        },
+        {
+          "idx": 12,
+          "slot": "album_title",
+          "predicted": null,
+          "expected": "Harry Potter"
+        },
+        {
+          "idx": 13,
+          "slot": "album_title",
+          "predicted": null,
+          "expected": "霸道总裁爱上我之宠妻无度"
+        },
+        {
+          "idx": 15,
+          "slot": "refund_reason",
+          "predicted": null,
+          "expected": "买错了"
+        },
+        {
+          "idx": 16,
+          "slot": "refund_reason",
+          "predicted": null,
+          "expected": "音质太差"
+        },
+        {
+          "idx": 18,
+          "slot": "refund_reason",
+          "predicted": null,
+          "expected": "内容和介绍不符"
+        },
+        {
+          "idx": 26,
+          "slot": "album_title",
+          "predicted": null,
+          "expected": "C++编程思想"
+        },
+        {
+          "idx": 37,
+          "slot": "album_title",
+          "predicted": null,
+          "expected": "三体"
+        },
+        {
+          "idx": 59,
+          "slot": "album_title",
+          "predicted": null,
+          "expected": "剑来"
+        }
+      ]
+    },
+    "clarify_rate": {
+      "metric": "clarify_rate",
+      "value": 0.1457,
+      "clarify_count": 37,
+      "total": 254
+    },
+    "category_breakdown": {
+      "routing": {
+        "correct": 40,
+        "total": 40,
+        "track_errors": [],
+        "accuracy": 1.0
+      },
+      "slot_filling": {
+        "correct": 39,
+        "total": 40,
+        "track_errors": [
+          {
+            "user_input": "《头牌过气后第二季》更新了吗？",
+            "predicted": "knowledge",
+            "expected": "task"
+          }
+        ],
+        "accuracy": 0.975
+      },
+      "knowledge": {
+        "correct": 40,
+        "total": 40,
+        "track_errors": [],
+        "accuracy": 1.0
+      },
+      "flow_completion": {
+        "correct": 35,
+        "total": 35,
+        "track_errors": [],
+        "accuracy": 1.0
+      },
+      "anti_interference": {
+        "correct": 59,
+        "total": 59,
+        "track_errors": [],
+        "accuracy": 1.0
+      },
+      "edge_case": {
+        "correct": 19,
+        "total": 20,
+        "track_errors": [
+          {
+            "user_input": "请问这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个",
+            "predicted": "clarify",
+            "expected": "task"
+          }
+        ],
+        "accuracy": 0.95
+      },
+      "clarify": {
+        "correct": 20,
+        "total": 20,
+        "track_errors": [],
+        "accuracy": 1.0
+      }
+    }
+  },
+  "detail": [
+    {
+      "id": "r001",
+      "category": "routing",
+      "description": "会员权益查询",
+      "turns": [
+        {
+          "user_input": "我的会员有什么权益？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r002",
+      "category": "routing",
+      "description": "会员到期时间",
+      "turns": [
+        {
+          "user_input": "会员什么时候到期？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r003",
+      "category": "routing",
+      "description": "会员等级查询",
+      "turns": [
+        {
+          "user_input": "我现在是什么会员等级？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r004",
+      "category": "routing",
+      "description": "升级会员",
+      "turns": [
+        {
+          "user_input": "怎么升级成高级会员？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r005",
+      "category": "routing",
+      "description": "会员价格",
+      "turns": [
+        {
+          "user_input": "会员多少钱一个月？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r006",
+      "category": "routing",
+      "description": "会员对比",
+      "turns": [
+        {
+          "user_input": "普通会员和高级会员有什么区别？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r007",
+      "category": "routing",
+      "description": "退款政策",
+      "turns": [
+        {
+          "user_input": "退款有什么规则？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "refund_policy"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r008",
+      "category": "routing",
+      "description": "使用帮助",
+      "turns": [
+        {
+          "user_input": "怎么使用这个APP？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r009",
+      "category": "routing",
+      "description": "下载功能",
+      "turns": [
+        {
+          "user_input": "可以离线下载吗？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r010",
+      "category": "routing",
+      "description": "多设备登录",
+      "turns": [
+        {
+          "user_input": "一个账号可以在几个设备上登录？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r011",
+      "category": "routing",
+      "description": "专辑信息查询",
+      "turns": [
+        {
+          "user_input": "《三体》这本书怎么样？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_content_detail"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r012",
+      "category": "routing",
+      "description": "作者查询",
+      "turns": [
+        {
+          "user_input": "这本书的作者是谁？",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "r013",
+      "category": "routing",
+      "description": "更新时间",
+      "turns": [
+        {
+          "user_input": "《斗罗大陆》什么时候更新？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_content_detail"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r014",
+      "category": "routing",
+      "description": "查订单",
+      "turns": [
+        {
+          "user_input": "帮我查一下订单ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "r015",
+      "category": "routing",
+      "description": "订单状态",
+      "turns": [
+        {
+          "user_input": "我的订单到哪了？",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "order_query",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "r016",
+      "category": "routing",
+      "description": "最近订单",
+      "turns": [
+        {
+          "user_input": "我最近买了什么？",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "order_query",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "r017",
+      "category": "routing",
+      "description": "订单详情",
+      "turns": [
+        {
+          "user_input": "查一下我最新订单的详情",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r018",
+      "category": "routing",
+      "description": "播放进度",
+      "turns": [
+        {
+          "user_input": "我昨天听到哪里了？",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r019",
+      "category": "routing",
+      "description": "最近播放",
+      "turns": [
+        {
+          "user_input": "我最近听了什么？",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r020",
+      "category": "routing",
+      "description": "指定书进度",
+      "turns": [
+        {
+          "user_input": "《头牌过气后》听到第几章了？",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "album_name": "《头牌过气后》"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "r021",
+      "category": "routing",
+      "description": "申请退款",
+      "turns": [
+        {
+          "user_input": "我要退款",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "resume_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "refund_apply",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "r022",
+      "category": "routing",
+      "description": "退款原因",
+      "turns": [
+        {
+          "user_input": "买的书不喜欢怎么退？",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "refund_apply",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "r023",
+      "category": "routing",
+      "description": "提交工单",
+      "turns": [
+        {
+          "user_input": "反馈一个问题",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "Bug反馈"
+            },
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "r024",
+      "category": "routing",
+      "description": "投诉建议",
+      "turns": [
+        {
+          "user_input": "我要投诉",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "投诉"
+            },
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "r025",
+      "category": "routing",
+      "description": "问候",
+      "turns": [
+        {
+          "user_input": "你好",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r026",
+      "category": "routing",
+      "description": "感谢",
+      "turns": [
+        {
+          "user_input": "谢谢你的帮助",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r027",
+      "category": "routing",
+      "description": "自我介绍",
+      "turns": [
+        {
+          "user_input": "你是谁？",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r028",
+      "category": "routing",
+      "description": "能力询问",
+      "turns": [
+        {
+          "user_input": "你能做什么？",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r029",
+      "category": "routing",
+      "description": "再见",
+      "turns": [
+        {
+          "user_input": "拜拜",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r030",
+      "category": "routing",
+      "description": "闲聊天气",
+      "turns": [
+        {
+          "user_input": "今天天气真好",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r031",
+      "category": "routing",
+      "description": "笑话",
+      "turns": [
+        {
+          "user_input": "讲个笑话",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r032",
+      "category": "routing",
+      "description": "单字输入",
+      "turns": [
+        {
+          "user_input": "嗯",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "r033",
+      "category": "routing",
+      "description": "模糊指代",
+      "turns": [
+        {
+          "user_input": "那个呢？",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "r034",
+      "category": "routing",
+      "description": "纯数字",
+      "turns": [
+        {
+          "user_input": "1234",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "r035",
+      "category": "routing",
+      "description": "无意义输入",
+      "turns": [
+        {
+          "user_input": "asdfgh",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "r036",
+      "category": "routing",
+      "description": "想知道会员信息",
+      "turns": [
+        {
+          "user_input": "我想知道我的会员还有多久到期",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r037",
+      "category": "routing",
+      "description": "了解一下权益",
+      "turns": [
+        {
+          "user_input": "了解一下会员有哪些权益",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r038",
+      "category": "routing",
+      "description": "帮我查会员",
+      "turns": [
+        {
+          "user_input": "帮我查一下我的会员信息",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r039",
+      "category": "routing",
+      "description": "会员相关问题",
+      "turns": [
+        {
+          "user_input": "会员可以听所有书吗？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r040",
+      "category": "routing",
+      "description": "咨询会员",
+      "turns": [
+        {
+          "user_input": "咨询一下会员服务",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "s001",
+      "category": "slot_filling",
+      "description": "标准订单号",
+      "turns": [
+        {
+          "user_input": "查订单ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s002",
+      "category": "slot_filling",
+      "description": "订单号带空格",
+      "turns": [
+        {
+          "user_input": "帮我查一下 ORD000000000008 这个订单",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000008"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s003",
+      "category": "slot_filling",
+      "description": "订单号中文",
+      "turns": [
+        {
+          "user_input": "查订单号ORD000000000012",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000012"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s004",
+      "category": "slot_filling",
+      "description": "仅订单号",
+      "turns": [
+        {
+          "user_input": "ORD000000000016",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000016"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s005",
+      "category": "slot_filling",
+      "description": "引号括起订单号",
+      "turns": [
+        {
+          "user_input": "帮我查\"ORD000000000020\"",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000020"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s006",
+      "category": "slot_filling",
+      "description": "书名号括起",
+      "turns": [
+        {
+          "user_input": "《斗罗大陆》听到哪里了？",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "album_name": "《斗罗大陆》"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s007",
+      "category": "slot_filling",
+      "description": "引号括起书名",
+      "turns": [
+        {
+          "user_input": "\"三体\"的播放进度",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "album_name": "三体"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s008",
+      "category": "slot_filling",
+      "description": "书名带数字",
+      "turns": [
+        {
+          "user_input": "米小圈上学记11听到哪里了？",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "album_name": "米小圈上学记11"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s009",
+      "category": "slot_filling",
+      "description": "续集书名",
+      "turns": [
+        {
+          "user_input": "《头牌过气后第二季》更新了吗？",
+          "predicted_track": "knowledge",
+          "expected_track": "task",
+          "correct": false,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_content_detail"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "s010",
+      "category": "slot_filling",
+      "description": "口语化书名",
+      "turns": [
+        {
+          "user_input": "那个剑来的听书进度",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "album_name": "那个剑来"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s011",
+      "category": "slot_filling",
+      "description": "英文书名",
+      "turns": [
+        {
+          "user_input": "Harry Potter 有声书进度",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "album_name": "Harry Potter"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s012",
+      "category": "slot_filling",
+      "description": "长书名",
+      "turns": [
+        {
+          "user_input": "《霸道总裁爱上我之宠妻无度》听书进度",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "album_name": "《霸道总裁爱上我之宠妻无度》"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s013",
+      "category": "slot_filling",
+      "description": "退款原因-不喜欢",
+      "turns": [
+        {
+          "user_input": "不喜欢这本书",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "refund_reason": "不喜欢这本书"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s014",
+      "category": "slot_filling",
+      "description": "退款原因-买错了",
+      "turns": [
+        {
+          "user_input": "买错了想退",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "refund_apply",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s015",
+      "category": "slot_filling",
+      "description": "退款原因-质量问题",
+      "turns": [
+        {
+          "user_input": "音质太差，听不清楚",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "内容问题",
+              "ticket_description": "音质太差，听不清楚"
+            },
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s016",
+      "category": "slot_filling",
+      "description": "退款原因-重复购买",
+      "turns": [
+        {
+          "user_input": "不小心重复购买了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "refund_reason": "重复购买"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s017",
+      "category": "slot_filling",
+      "description": "退款原因-内容不符",
+      "turns": [
+        {
+          "user_input": "内容和介绍不符",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "内容问题",
+              "ticket_description": "内容和介绍不符"
+            },
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s018",
+      "category": "slot_filling",
+      "description": "工单类型-Bug反馈",
+      "turns": [
+        {
+          "user_input": "APP经常闪退",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "Bug反馈",
+              "ticket_description": "APP经常闪退"
+            },
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s019",
+      "category": "slot_filling",
+      "description": "工单类型-功能建议",
+      "turns": [
+        {
+          "user_input": "希望能增加倍速播放功能",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "功能建议",
+              "ticket_description": "希望能增加倍速播放功能"
+            },
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s020",
+      "category": "slot_filling",
+      "description": "工单描述详细",
+      "turns": [
+        {
+          "user_input": "播放到一半就自动停止了，每次都要重新打开APP才能继续",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "Bug反馈",
+              "ticket_description": "播放到一半就自动停止了，每次都要重新打开APP才能继续"
+            },
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s021",
+      "category": "slot_filling",
+      "description": "退款-订单号+原因",
+      "turns": [
+        {
+          "user_input": "ORD000000000024我要退款，买错了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000024",
+              "refund_reason": "买错了"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s022",
+      "category": "slot_filling",
+      "description": "退款-订单号+原因+类型",
+      "turns": [
+        {
+          "user_input": "订单ORD000000000028申请全额退款，不想要了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000028",
+              "refund_reason": "不想要了",
+              "refund_type": "全额退款"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s023",
+      "category": "slot_filling",
+      "description": "间接指代订单",
+      "turns": [
+        {
+          "user_input": "上面那个订单的详情",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "order_query",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s024",
+      "category": "slot_filling",
+      "description": "时间指代",
+      "turns": [
+        {
+          "user_input": "上周买的那本书",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_summary": "上周买的那本书"
+            },
+            "flow_name": "order_query",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s025",
+      "category": "slot_filling",
+      "description": "最新订单",
+      "turns": [
+        {
+          "user_input": "最新一笔订单",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "s026",
+      "category": "slot_filling",
+      "description": "口语退款",
+      "turns": [
+        {
+          "user_input": "能退钱吗？",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "refund_apply",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s027",
+      "category": "slot_filling",
+      "description": "商量退款",
+      "turns": [
+        {
+          "user_input": "这个我不太满意，想退掉",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "refund_apply",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s028",
+      "category": "slot_filling",
+      "description": "礼貌请求查订单",
+      "turns": [
+        {
+          "user_input": "麻烦帮我查一下订单ORD000000000032，谢谢",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000032"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s029",
+      "category": "slot_filling",
+      "description": "简短查进度",
+      "turns": [
+        {
+          "user_input": "进度",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "s030",
+      "category": "slot_filling",
+      "description": "问听书位置",
+      "turns": [
+        {
+          "user_input": "上次听到哪里了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "s031",
+      "category": "slot_filling",
+      "description": "订单号含字母数字混合",
+      "turns": [
+        {
+          "user_input": "ORD202507010000000036",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD202507010000000036"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s032",
+      "category": "slot_filling",
+      "description": "书名含特殊符号",
+      "turns": [
+        {
+          "user_input": "《C++编程思想》有声书进度",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "album_name": "《C++编程思想》"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s033",
+      "category": "slot_filling",
+      "description": "退款-不满意",
+      "turns": [
+        {
+          "user_input": "听了几集不满意想退",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "refund_reason": "听了几集不满意"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s034",
+      "category": "slot_filling",
+      "description": "工单-App问题",
+      "turns": [
+        {
+          "user_input": "登录不上去了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "Bug反馈"
+            },
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s035",
+      "category": "slot_filling",
+      "description": "工单-内容问题",
+      "turns": [
+        {
+          "user_input": "这本书有章节重复了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "内容问题",
+              "ticket_description": "这本书有章节重复了"
+            },
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s036",
+      "category": "slot_filling",
+      "description": "两本书进度",
+      "turns": [
+        {
+          "user_input": "《三体》和《流浪地球》的进度分别是多少？",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "album_name": "《三体》"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s037",
+      "category": "slot_filling",
+      "description": "最近听的书进度",
+      "turns": [
+        {
+          "user_input": "最近听的那本修仙小说进度",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "s038",
+      "category": "slot_filling",
+      "description": "订单+状态询问",
+      "turns": [
+        {
+          "user_input": "我的订单ORD000000000040发货了吗？",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000040"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s039",
+      "category": "slot_filling",
+      "description": "订单+支付问题",
+      "turns": [
+        {
+          "user_input": "ORD000000000044这笔订单支付失败了怎么回事",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "Bug反馈",
+              "order_number": "ORD000000000044",
+              "ticket_description": "订单支付失败"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "s040",
+      "category": "slot_filling",
+      "description": "退款+全部订单",
+      "turns": [
+        {
+          "user_input": "最近买的三本书都想退",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "refund_reason": "不喜欢"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k001",
+      "category": "knowledge",
+      "description": "会员权益详情",
+      "turns": [
+        {
+          "user_input": "高级会员有哪些权益？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k002",
+      "category": "knowledge",
+      "description": "会员续费",
+      "turns": [
+        {
+          "user_input": "怎么续费会员？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k003",
+      "category": "knowledge",
+      "description": "自动续费",
+      "turns": [
+        {
+          "user_input": "会员会自动续费吗？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k004",
+      "category": "knowledge",
+      "description": "取消会员",
+      "turns": [
+        {
+          "user_input": "怎么取消自动续费？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k005",
+      "category": "knowledge",
+      "description": "会员试用",
+      "turns": [
+        {
+          "user_input": "有免费试用吗？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k006",
+      "category": "knowledge",
+      "description": "会员优惠",
+      "turns": [
+        {
+          "user_input": "会员有什么优惠活动？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k007",
+      "category": "knowledge",
+      "description": "学生会员",
+      "turns": [
+        {
+          "user_input": "有学生价吗？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k008",
+      "category": "knowledge",
+      "description": "家庭会员",
+      "turns": [
+        {
+          "user_input": "可以共享会员给家人吗？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k009",
+      "category": "knowledge",
+      "description": "退款条件",
+      "turns": [
+        {
+          "user_input": "购买后多久可以退款？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "refund_policy"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k010",
+      "category": "knowledge",
+      "description": "听书限制",
+      "turns": [
+        {
+          "user_input": "每天能听多久？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k011",
+      "category": "knowledge",
+      "description": "下载数量",
+      "turns": [
+        {
+          "user_input": "最多能下载多少本书？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k012",
+      "category": "knowledge",
+      "description": "版权说明",
+      "turns": [
+        {
+          "user_input": "下载的书可以分享给别人吗？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k013",
+      "category": "knowledge",
+      "description": "发票相关",
+      "turns": [
+        {
+          "user_input": "怎么开发票？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k014",
+      "category": "knowledge",
+      "description": "支付方式",
+      "turns": [
+        {
+          "user_input": "支持哪些支付方式？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k015",
+      "category": "knowledge",
+      "description": "账号安全",
+      "turns": [
+        {
+          "user_input": "怎么修改密码？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k016",
+      "category": "knowledge",
+      "description": "隐私政策",
+      "turns": [
+        {
+          "user_input": "我的听书记录会被别人看到吗？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k017",
+      "category": "knowledge",
+      "description": "作品简介",
+      "turns": [
+        {
+          "user_input": "《三体》讲的是什么？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_content_detail"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k018",
+      "category": "knowledge",
+      "description": "演播者信息",
+      "turns": [
+        {
+          "user_input": "这本书是谁播讲的？",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k019",
+      "category": "knowledge",
+      "description": "作品评分",
+      "turns": [
+        {
+          "user_input": "《诡秘之主》评分多少？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_content_detail"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k020",
+      "category": "knowledge",
+      "description": "章节数",
+      "turns": [
+        {
+          "user_input": "《全职高手》一共多少章？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_content_detail"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k021",
+      "category": "knowledge",
+      "description": "完结状态",
+      "turns": [
+        {
+          "user_input": "《剑来》完结了吗？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_content_detail"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k022",
+      "category": "knowledge",
+      "description": "类似推荐",
+      "turns": [
+        {
+          "user_input": "有没有类似《鬼吹灯》的书？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_search"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k023",
+      "category": "knowledge",
+      "description": "分类浏览",
+      "turns": [
+        {
+          "user_input": "有什么好看的玄幻小说？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_search"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k024",
+      "category": "knowledge",
+      "description": "新书上架",
+      "turns": [
+        {
+          "user_input": "最近有什么新书上架？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_search"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k025",
+      "category": "knowledge",
+      "description": "我要查会员",
+      "turns": [
+        {
+          "user_input": "我要查询我的会员信息",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k026",
+      "category": "knowledge",
+      "description": "帮我看看会员",
+      "turns": [
+        {
+          "user_input": "帮我看看会员等级",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k027",
+      "category": "knowledge",
+      "description": "查看会员权益",
+      "turns": [
+        {
+          "user_input": "查看会员权益",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k028",
+      "category": "knowledge",
+      "description": "了解一下会员",
+      "turns": [
+        {
+          "user_input": "了解会员权益",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k029",
+      "category": "knowledge",
+      "description": "如何下载",
+      "turns": [
+        {
+          "user_input": "书怎么下载到手机上？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k030",
+      "category": "knowledge",
+      "description": "倍速播放",
+      "turns": [
+        {
+          "user_input": "怎么调播放速度？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "playback_help"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k031",
+      "category": "knowledge",
+      "description": "定时关闭",
+      "turns": [
+        {
+          "user_input": "有定时关闭功能吗？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "playback_help"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k032",
+      "category": "knowledge",
+      "description": "排行榜",
+      "turns": [
+        {
+          "user_input": "现在什么书最火？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_search"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k033",
+      "category": "knowledge",
+      "description": "VIP专享",
+      "turns": [
+        {
+          "user_input": "哪些书是会员专享的？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k034",
+      "category": "knowledge",
+      "description": "积分规则",
+      "turns": [
+        {
+          "user_input": "积分怎么获取？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k035",
+      "category": "knowledge",
+      "description": "听书时长",
+      "turns": [
+        {
+          "user_input": "我总共听了多长时间？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k036",
+      "category": "knowledge",
+      "description": "退款政策详情",
+      "turns": [
+        {
+          "user_input": "退款需要什么条件？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "refund_policy"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k037",
+      "category": "knowledge",
+      "description": "礼品卡",
+      "turns": [
+        {
+          "user_input": "怎么购买礼品卡？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k038",
+      "category": "knowledge",
+      "description": "播放器设置",
+      "turns": [
+        {
+          "user_input": "怎么设置睡眠模式？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k039",
+      "category": "knowledge",
+      "description": "有声书分类",
+      "turns": [
+        {
+          "user_input": "有没有适合孩子听的书？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_search"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "k040",
+      "category": "knowledge",
+      "description": "会员听书范围",
+      "turns": [
+        {
+          "user_input": "会员能听所有书吗还是部分？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "f001",
+      "category": "flow_completion",
+      "description": "订单查询-完整流程",
+      "turns": [
+        {
+          "user_input": "查订单ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "f002",
+      "category": "flow_completion",
+      "description": "订单查询-先问再给号",
+      "turns": [
+        {
+          "user_input": "我想查订单",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "order_query",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "f003",
+      "category": "flow_completion",
+      "description": "订单查询-多个订单号",
+      "turns": [
+        {
+          "user_input": "帮我查三个订单ORD000000000004 ORD000000000008 ORD000000000012",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "f004",
+      "category": "flow_completion",
+      "description": "退款-完整多轮",
+      "turns": [
+        {
+          "user_input": "我要退款",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "resume_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        },
+        {
+          "user_input": "ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        },
+        {
+          "user_input": "不喜欢",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "refund_reason": "不喜欢"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        }
+      ]
+    },
+    {
+      "id": "f005",
+      "category": "flow_completion",
+      "description": "退款-一步到位",
+      "turns": [
+        {
+          "user_input": "ORD000000000008退款，买错了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "resume_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000008",
+              "refund_reason": "买错了"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        }
+      ]
+    },
+    {
+      "id": "f006",
+      "category": "flow_completion",
+      "description": "工单-完整多轮",
+      "turns": [
+        {
+          "user_input": "提交一个问题",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "resume_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        },
+        {
+          "user_input": "APP经常闪退，特别是在播放音频的时候",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "resume_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "Bug反馈",
+              "ticket_description": "APP经常闪退，特别是在播放音频的时候"
+            },
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "f007",
+      "category": "flow_completion",
+      "description": "播放记录-最近播放",
+      "turns": [
+        {
+          "user_input": "我最近听了什么",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "f008",
+      "category": "flow_completion",
+      "description": "播放记录-指定书名",
+      "turns": [
+        {
+          "user_input": "《三体》听到哪里了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "album_name": "三体"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "f009",
+      "category": "flow_completion",
+      "description": "退款中闲聊后继续",
+      "turns": [
+        {
+          "user_input": "我要退款",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "resume_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_reason"
+          }
+        },
+        {
+          "user_input": "你好",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_reason"
+          }
+        }
+      ]
+    },
+    {
+      "id": "f010",
+      "category": "flow_completion",
+      "description": "退款中查知识后继续",
+      "turns": [
+        {
+          "user_input": "我要退款",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000008",
+              "refund_reason": "买错了"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        },
+        {
+          "user_input": "退款政策是什么？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "refund_policy"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "ORD000000000008",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "resume_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000008"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        },
+        {
+          "user_input": "买错了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "refund_reason": "买错了"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        }
+      ]
+    },
+    {
+      "id": "f011",
+      "category": "flow_completion",
+      "description": "新用户欢迎",
+      "turns": [
+        {
+          "user_input": "你好",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "f012",
+      "category": "flow_completion",
+      "description": "退款后查订单",
+      "turns": [
+        {
+          "user_input": "ORD000000000004退款，买错了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "resume_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004",
+              "refund_reason": "买错了"
+            }
+          }
+        },
+        {
+          "user_input": "再查一下ORD000000000012",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000012"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        }
+      ]
+    },
+    {
+      "id": "f013",
+      "category": "flow_completion",
+      "description": "专辑详情查询",
+      "turns": [
+        {
+          "user_input": "《三体》详细信息",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_content_detail"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "f014",
+      "category": "flow_completion",
+      "description": "连续查两本书进度",
+      "turns": [
+        {
+          "user_input": "《三体》听到哪里了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "album_title": "三体"
+            }
+          }
+        },
+        {
+          "user_input": "那《流浪地球》呢",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "album_title": "流浪地球"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "f015",
+      "category": "flow_completion",
+      "description": "退款-三要素分步",
+      "turns": [
+        {
+          "user_input": "退款",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "resume_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        },
+        {
+          "user_input": "ORD000000000016",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000016"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        },
+        {
+          "user_input": "内容重复",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "refund_reason": "内容重复"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        }
+      ]
+    },
+    {
+      "id": "f016",
+      "category": "flow_completion",
+      "description": "退款后取消",
+      "turns": [
+        {
+          "user_input": "我要退款",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "算了不退了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "cancel_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "refund_apply",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "f017",
+      "category": "flow_completion",
+      "description": "工单-一步到位",
+      "turns": [
+        {
+          "user_input": "反馈bug：播放到38分钟就闪退",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "Bug反馈",
+              "ticket_description": "播放到38分钟就闪退"
+            },
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "f018",
+      "category": "flow_completion",
+      "description": "首次使用咨询",
+      "turns": [
+        {
+          "user_input": "我第一次用，不知道怎么开始",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "f019",
+      "category": "flow_completion",
+      "description": "退款后重试",
+      "turns": [
+        {
+          "user_input": "ORD000000000020退款，不想要了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000020",
+              "refund_reason": "不想要了"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_reason"
+          }
+        },
+        {
+          "user_input": "算了还是退ORD000000000024吧",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "cancel_flow",
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000024",
+              "refund_reason": "不想要了"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        }
+      ]
+    },
+    {
+      "id": "f020",
+      "category": "flow_completion",
+      "description": "查完订单再查播放",
+      "turns": [
+        {
+          "user_input": "查订单ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            }
+          }
+        },
+        {
+          "user_input": "我最近听了什么",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a001",
+      "category": "anti_interference",
+      "description": "多轮task后查会员",
+      "turns": [
+        {
+          "user_input": "查订单ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            }
+          }
+        },
+        {
+          "user_input": "帮我查一下ORD000000000008",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000008"
+            }
+          }
+        },
+        {
+          "user_input": "我要查询我的会员信息",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a002",
+      "category": "anti_interference",
+      "description": "退款后问会员",
+      "turns": [
+        {
+          "user_input": "ORD000000000004退款，买错了",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "resume_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004",
+              "refund_reason": "买错了"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_type"
+          }
+        },
+        {
+          "user_input": "会员有什么权益",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a003",
+      "category": "anti_interference",
+      "description": "工单后问平台规则",
+      "turns": [
+        {
+          "user_input": "APP老是闪退",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "Bug反馈",
+              "ticket_description": "APP老是闪退"
+            },
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        },
+        {
+          "user_input": "多久能退款",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "refund_policy"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a004",
+      "category": "anti_interference",
+      "description": "查订单后问退款政策",
+      "turns": [
+        {
+          "user_input": "查订单ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            }
+          }
+        },
+        {
+          "user_input": "退款有什么条件吗",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "refund_policy"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a005",
+      "category": "anti_interference",
+      "description": "多次task后查帮助",
+      "turns": [
+        {
+          "user_input": "查订单ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            }
+          }
+        },
+        {
+          "user_input": "ORD000000000008",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000008"
+            }
+          }
+        },
+        {
+          "user_input": "我最近听了什么",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "怎么使用这个APP",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a006",
+      "category": "anti_interference",
+      "description": "task后闲聊",
+      "turns": [
+        {
+          "user_input": "查订单ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            }
+          }
+        },
+        {
+          "user_input": "谢谢你",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a007",
+      "category": "anti_interference",
+      "description": "task后问候",
+      "turns": [
+        {
+          "user_input": "我最近听了什么",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "你好",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a008",
+      "category": "anti_interference",
+      "description": "多轮会员+查询混合",
+      "turns": [
+        {
+          "user_input": "会员有什么权益",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "高级会员多少钱",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "怎么升级",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "查一下我的订单ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "a009",
+      "category": "anti_interference",
+      "description": "会员FAQ后仍查会员",
+      "turns": [
+        {
+          "user_input": "会员可以退款吗",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "refund_policy"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "我要查我的会员等级",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a010",
+      "category": "anti_interference",
+      "description": "退款FAQ后查会员",
+      "turns": [
+        {
+          "user_input": "退款政策是什么",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "refund_policy"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "我的会员还有多久到期",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a011",
+      "category": "anti_interference",
+      "description": "任务中断后知识查询",
+      "turns": [
+        {
+          "user_input": "我要退款",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "refund_apply",
+            "flow_step": "ask_order_number"
+          }
+        },
+        {
+          "user_input": "怎么查看会员权益",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "高级会员有什么好处",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a012",
+      "category": "anti_interference",
+      "description": "连续多任务后知识",
+      "turns": [
+        {
+          "user_input": "查订单ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_order_number"
+          }
+        },
+        {
+          "user_input": "我最近听了什么",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "我要退款",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "resume_flow"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "会员有哪些类型",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a013",
+      "category": "anti_interference",
+      "description": "流程中断后问规则",
+      "turns": [
+        {
+          "user_input": "我要提交工单",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_ticket_type"
+          }
+        },
+        {
+          "user_input": "平台支持哪些支付方式",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a014",
+      "category": "anti_interference",
+      "description": "知识后问task",
+      "turns": [
+        {
+          "user_input": "会员多少钱",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "可以离线听吗",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "playback_help"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "查我的订单ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "a015",
+      "category": "anti_interference",
+      "description": "长时间对话后仍能路由",
+      "turns": [
+        {
+          "user_input": "你好",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "查订单ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            }
+          }
+        },
+        {
+          "user_input": "谢谢你",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "我最近听了什么",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "好的",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "我要查我的会员信息",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a016",
+      "category": "anti_interference",
+      "description": "bot回复含订单关键词后仍路由正确",
+      "turns": [
+        {
+          "user_input": "我要退款",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "resume_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "refund_apply",
+            "flow_step": "ask_order_number"
+          }
+        },
+        {
+          "user_input": "查看会员权益",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a017",
+      "category": "anti_interference",
+      "description": "多轮混合不混淆",
+      "turns": [
+        {
+          "user_input": "会员到期时间",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "ORD000000000008",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000008"
+            }
+          }
+        },
+        {
+          "user_input": "怎么下载离线",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "《剑来》进度",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "album_name": "剑来"
+            }
+          }
+        },
+        {
+          "user_input": "你好",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a018",
+      "category": "anti_interference",
+      "description": "退款流程中突然查帮助",
+      "turns": [
+        {
+          "user_input": "我要退款",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "resume_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_reason"
+          }
+        },
+        {
+          "user_input": "ORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            },
+            "flow_name": "refund_apply",
+            "flow_step": "ask_refund_reason"
+          }
+        },
+        {
+          "user_input": "退款一般多久到账",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "refund_policy"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a019",
+      "category": "anti_interference",
+      "description": "工单后查会员",
+      "turns": [
+        {
+          "user_input": "APP有问题",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "ticket_type": "Bug反馈",
+              "ticket_description": "APP有问题"
+            },
+            "flow_name": "ticket_submit",
+            "flow_step": "ask_order_number"
+          }
+        },
+        {
+          "user_input": "会员快到期了怎么续",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "a020",
+      "category": "anti_interference",
+      "description": "多知识查询不误判为task",
+      "turns": [
+        {
+          "user_input": "会员有什么类型",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "怎么下载书",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "有什么好书推荐",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "album_search"
+            ],
+            "validation_passed": true
+          }
+        },
+        {
+          "user_input": "积分怎么用",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "platform_rule"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "e001",
+      "category": "edge_case",
+      "description": "空文本",
+      "turns": [
+        {
+          "user_input": "",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "e002",
+      "category": "edge_case",
+      "description": "超长文本",
+      "turns": [
+        {
+          "user_input": "请问这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个这个",
+          "predicted_track": "clarify",
+          "expected_track": "task",
+          "correct": false,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e003",
+      "category": "edge_case",
+      "description": "纯空格",
+      "turns": [
+        {
+          "user_input": "   ",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "e004",
+      "category": "edge_case",
+      "description": "纯标点",
+      "turns": [
+        {
+          "user_input": "？。。！",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "e005",
+      "category": "edge_case",
+      "description": "纯数字",
+      "turns": [
+        {
+          "user_input": "12345678",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e006",
+      "category": "edge_case",
+      "description": "特殊字符",
+      "turns": [
+        {
+          "user_input": "@#$%^&*()",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "e007",
+      "category": "edge_case",
+      "description": "emoji",
+      "turns": [
+        {
+          "user_input": "😊😊😊",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "e008",
+      "category": "edge_case",
+      "description": "英文问句",
+      "turns": [
+        {
+          "user_input": "How can I check my membership?",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "e009",
+      "category": "edge_case",
+      "description": "中英混合",
+      "turns": [
+        {
+          "user_input": "我的VIP membership什么时候expire？",
+          "predicted_track": "knowledge",
+          "expected_track": "knowledge",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "knowledge"
+            ],
+            "knowledge_intents": [
+              "membership_info"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "e010",
+      "category": "edge_case",
+      "description": "换行符",
+      "turns": [
+        {
+          "user_input": "查询订单\nORD000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ORD000000000004"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "e011",
+      "category": "edge_case",
+      "description": "HTML字符",
+      "turns": [
+        {
+          "user_input": "<b>查询</b>订单",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "order_query",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e012",
+      "category": "edge_case",
+      "description": "SQL注入式输入",
+      "turns": [
+        {
+          "user_input": "'; DROP TABLE users; --",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e013",
+      "category": "edge_case",
+      "description": "重复字符",
+      "turns": [
+        {
+          "user_input": "啊啊啊啊啊啊啊啊",
+          "predicted_track": "chitchat",
+          "expected_track": "chitchat",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "chitchat"
+            ],
+            "validation_passed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "e014",
+      "category": "edge_case",
+      "description": "URL输入",
+      "turns": [
+        {
+          "user_input": "https://example.com/order/123",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e015",
+      "category": "edge_case",
+      "description": "极简输入-好",
+      "turns": [
+        {
+          "user_input": "好",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "e016",
+      "category": "edge_case",
+      "description": "极简输入-行",
+      "turns": [
+        {
+          "user_input": "行",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "e017",
+      "category": "edge_case",
+      "description": "极简输入-查",
+      "turns": [
+        {
+          "user_input": "查",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "e018",
+      "category": "edge_case",
+      "description": "仅标点+字母",
+      "turns": [
+        {
+          "user_input": "ord000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ord000000000004"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "e019",
+      "category": "edge_case",
+      "description": "订单号小写",
+      "turns": [
+        {
+          "user_input": "ord000000000004",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow",
+              "set_slots"
+            ],
+            "validation_passed": true,
+            "slots_filled": {
+              "order_number": "ord000000000004"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "e020",
+      "category": "edge_case",
+      "description": "带脏话的查询",
+      "turns": [
+        {
+          "user_input": "TMD这个破APP怎么查订单",
+          "predicted_track": "task",
+          "expected_track": "task",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [
+              "task"
+            ],
+            "task_commands": [
+              "start_flow"
+            ],
+            "validation_passed": true,
+            "flow_name": "order_query",
+            "flow_step": "ask_order_number"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c001",
+      "category": "clarify",
+      "description": "单字-嗯",
+      "turns": [
+        {
+          "user_input": "嗯",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "c002",
+      "category": "clarify",
+      "description": "单字-哦",
+      "turns": [
+        {
+          "user_input": "哦",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "c003",
+      "category": "clarify",
+      "description": "单字-啊",
+      "turns": [
+        {
+          "user_input": "啊",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "c004",
+      "category": "clarify",
+      "description": "模糊指代-那个",
+      "turns": [
+        {
+          "user_input": "那个呢",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c005",
+      "category": "clarify",
+      "description": "模糊指代-这个",
+      "turns": [
+        {
+          "user_input": "这个怎么弄",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c006",
+      "category": "clarify",
+      "description": "模糊指代-帮我看看",
+      "turns": [
+        {
+          "user_input": "帮我看看",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c007",
+      "category": "clarify",
+      "description": "模糊指代-怎么办",
+      "turns": [
+        {
+          "user_input": "怎么办",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c008",
+      "category": "clarify",
+      "description": "模糊指代-然后呢",
+      "turns": [
+        {
+          "user_input": "然后呢",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c009",
+      "category": "clarify",
+      "description": "模糊指代-为什么",
+      "turns": [
+        {
+          "user_input": "为什么",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c010",
+      "category": "clarify",
+      "description": "纯感叹词",
+      "turns": [
+        {
+          "user_input": "哎",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "c011",
+      "category": "clarify",
+      "description": "无法判断-帮我",
+      "turns": [
+        {
+          "user_input": "帮帮我",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c012",
+      "category": "clarify",
+      "description": "无法判断-有问题",
+      "turns": [
+        {
+          "user_input": "有个问题",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c013",
+      "category": "clarify",
+      "description": "无法判断-不懂",
+      "turns": [
+        {
+          "user_input": "不太懂",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c014",
+      "category": "clarify",
+      "description": "无法判断-看不懂",
+      "turns": [
+        {
+          "user_input": "看不懂",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c015",
+      "category": "clarify",
+      "description": "纯表情",
+      "turns": [
+        {
+          "user_input": ":-)",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "c016",
+      "category": "clarify",
+      "description": "随机字母",
+      "turns": [
+        {
+          "user_input": "xjdjdk",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "validation_passed": false,
+            "clarify_reason": "prefilter_unroutable",
+            "predicted_tracks": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "c017",
+      "category": "clarify",
+      "description": "不完整句子-我想",
+      "turns": [
+        {
+          "user_input": "我想...",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c018",
+      "category": "clarify",
+      "description": "不完整句子-有没有",
+      "turns": [
+        {
+          "user_input": "有没有那种",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c019",
+      "category": "clarify",
+      "description": "歧义语句-买",
+      "turns": [
+        {
+          "user_input": "买一个",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c020",
+      "category": "clarify",
+      "description": "歧义语句-给我查",
+      "turns": [
+        {
+          "user_input": "给我查查",
+          "predicted_track": "clarify",
+          "expected_track": "clarify",
+          "correct": true,
+          "diagnostics": {
+            "predicted_tracks": [],
+            "validation_passed": false,
+            "clarify_reason": "missing_track"
+          }
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

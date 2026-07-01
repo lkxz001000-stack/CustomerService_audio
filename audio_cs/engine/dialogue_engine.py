@@ -53,6 +53,16 @@ _UNROUTABLE_PUNCTUATION = re.compile(
     r"]+$"
 )
 
+# 预过滤：纯 ASCII 字母乱敲（无中文、无空格、长度 >= 2，如 asdfgh / xjdjdk）
+_UNROUTABLE_GARBLED_ASCII = re.compile(
+    r"^[a-zA-Z]{2,}$"
+)
+
+# 预过滤：单字任意 Unicode 字母（任何单一字符都无法承载明确意图，包括 CJK 和 ASCII）
+_UNROUTABLE_SINGLE_LETTER = re.compile(
+    r"^[一-鿿㐀-䶿a-zA-Z]$"
+)
+
 
 def _is_unroutable(text: str | None) -> bool:
     """判断输入是否明显无法承载意图，可直接走 clarify 而不调用 LLM。"""
@@ -64,6 +74,10 @@ def _is_unroutable(text: str | None) -> bool:
     if _UNROUTABLE_EXCLAMATION.match(stripped):
         return True
     if _UNROUTABLE_PUNCTUATION.match(stripped):
+        return True
+    if _UNROUTABLE_SINGLE_LETTER.match(stripped):
+        return True
+    if _UNROUTABLE_GARBLED_ASCII.match(stripped):
         return True
     return False
 
@@ -163,6 +177,9 @@ class DialogueEngine:
 
         # 5. 提交 pending_turn —— 将暂存轮次归档到 session 的 turns 列表中
         state.commit_pending_turn()
+
+        # 后台异步生成对话摘要（超过 5 轮时），不阻塞当前请求
+        asyncio.create_task(try_generate_summary(state))
 
         # 6. 在线指标记录
         elapsed = time.time() - t_start
@@ -266,15 +283,21 @@ class DialogueEngine:
             diagnostics["validation_passed"] = False
             diagnostics["clarify_reason"] = "prefilter_unroutable"
             diagnostics["predicted_tracks"] = []
-            return await self.clarify_responder.respond(ClarifyReason.MISSING_TRACK, state), diagnostics
+            return [BotMessage(text="抱歉，我没有理解您的意思，请再说得具体一点吧。")], diagnostics
 
         # 1. 调用 LLM 进行路由分析，得到规划结果 TurnPlan
         logger.debug("调用 LLM 进行意图规划...")
 
-        # 后台异步生成对话摘要（超过 5 轮时），不阻塞当前请求
-        asyncio.create_task(try_generate_summary(state))
-
-        turn_plan = await self.planner.predict(user_message, state=state, flow_list=flow_list, intents=intents)
+        try:
+            turn_plan = await self.planner.predict(user_message, state=state, flow_list=flow_list, intents=intents)
+        except Exception:
+            logger.exception("LLM 规划调用失败，回退到意图澄清: sender_id=%s", state.sender_id)
+            await telemetry.record_clarify()
+            await telemetry.record_track("clarify")
+            diagnostics["validation_passed"] = False
+            diagnostics["clarify_reason"] = "llm_api_error"
+            diagnostics["predicted_tracks"] = []
+            return [BotMessage(text="抱歉，服务暂时不可用，请稍后再试。")], diagnostics
 
         # 记录 TurnPlan 信息
         tracks = turn_plan.activated_tracks()
