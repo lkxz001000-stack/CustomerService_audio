@@ -26,6 +26,7 @@ from audio_cs.infrastructure.llm_client import llm_client
 from audio_cs.history.builder import ChatHistoryBuilder
 from audio_cs.task.flow.flows import FlowsList
 from audio_cs.knowledge.intents import KnowledgeIntent
+from audio_cs.history.summarizer import get_cached_summary
 
 logger = logging.getLogger(__name__)
 
@@ -100,7 +101,12 @@ class TurnPlanner:
         """
         # ---- 用户消息与对话历史 ----
         user_message = ChatHistoryBuilder.process_user_message(user_message)
-        current_conversation = ChatHistoryBuilder.build(state.current_session().turns[-10:])
+        # 仅取最近 5 轮（超过 5 轮的部分由异步摘要管线处理）
+        recent_turns = state.current_session().turns[-5:]
+        current_conversation = ChatHistoryBuilder.build(recent_turns)
+        # 超过 5 轮的早期对话摘要
+        session = state.current_session()
+        summary = get_cached_summary(session.session_id) if session else None
 
         # ---- 聚焦对象：用户当前点击的界面卡片/按钮，用于判断是否需要先澄清意图 ----
         focused_object_json = json.dumps(state.focused_object.to_dict(),
@@ -140,6 +146,7 @@ class TurnPlanner:
         return {
             "user_message": user_message,
             "current_conversation": current_conversation,
+            "conversation_summary": summary or "",
 
             "focused_object_json": focused_object_json,
 

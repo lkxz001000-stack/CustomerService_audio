@@ -48,6 +48,7 @@ class ChatResponse(BaseModel):
     sender_id: str  # 机器人标识
     message_id: str  # 本轮对话的消息唯一ID（UUID）
     messages: list[ChatBotMessage]  # 机器人回复消息列表（支持多条消息组合回复）
+    diagnostics: dict | None = None  # 诊断信息（评估模式时启用）
 
 
 

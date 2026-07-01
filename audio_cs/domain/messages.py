@@ -236,6 +236,7 @@ class ProcessResult:
         sender_id:  对应用户唯一标识，api 层据此路由回复到正确的 SSE 连接
         message_id: 对应的用户消息 ID，用于前端做消息关联（request-id 模式）
         messages:   BotMessage 列表，一条用户消息可能产生多条机器人回复
+        diagnostics: 诊断信息（可选），用于评估系统质量
 
     设计意图:
         将处理结果从领域模型中解耦出来，service 层不需要关心如何把回复
@@ -245,6 +246,7 @@ class ProcessResult:
     sender_id: str
     message_id: str
     messages: list[BotMessage]
+    diagnostics: dict | None = None
 
 
 @dataclass(slots=True)

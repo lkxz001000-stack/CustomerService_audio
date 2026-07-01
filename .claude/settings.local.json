@@ -26,7 +26,18 @@
       "Bash(mysql *)",
       "Bash(python -c ' *)",
       "Read(//mnt/d/05_PythonProject/python_code/**)",
-      "Bash(python -c \"from audio_cs.task.action.customer.slot_extractor import extract_album_name; print\\('slot_extractor OK'\\)\")"
+      "Bash(python -c \"from audio_cs.task.action.customer.slot_extractor import extract_album_name; print\\('slot_extractor OK'\\)\")",
+      "Bash(git *)",
+      "WebSearch",
+      "Bash(python -m py_compile evaluation/__init__.py)",
+      "Bash(python -m py_compile evaluation/test_cases.py)",
+      "Bash(python -m py_compile evaluation/metrics.py)",
+      "Bash(python -m py_compile evaluation/telemetry.py)",
+      "Bash(python -m py_compile evaluation/runner.py)",
+      "Bash(python -m py_compile audio_cs/domain/messages.py)",
+      "Bash(python -m py_compile audio_cs/api/schemas.py)",
+      "Bash(python -m py_compile audio_cs/api/router/chat_router.py)",
+      "Bash(python -m py_compile audio_cs/engine/dialogue_engine.py)"
     ]
   }
 }

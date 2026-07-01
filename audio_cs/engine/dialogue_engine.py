@@ -11,6 +11,7 @@
 
 import logging
 import time
+import asyncio
 from typing import Any, Coroutine
 
 from audio_cs.domain.state import DialogueState
@@ -23,9 +24,11 @@ from audio_cs.chitchat.handler import ChitChatHandler
 from audio_cs.task.flow.flows import FlowsList
 from audio_cs.plan.validator import TurnPlanValidator
 from audio_cs.clarify.responder import ClarifyResponser
-from audio_cs.task.command.commands import Command, SetSlotsCommand
+from audio_cs.task.command.commands import Command, SetSlotsCommand, StartedFlowCommand
 from audio_cs.task.flow.steps import CollectFlowStep
 from audio_cs.plan.turn_plan import ClarifyReason
+from audio_cs.history.summarizer import try_generate_summary
+from evaluation.telemetry import telemetry
 
 logger = logging.getLogger(__name__)
 
@@ -92,6 +95,7 @@ class DialogueEngine:
         :param state: 对话状态（含会话历史、当前流程等上下文）
         :return: ProcessResult，包含机器人回复消息列表
         """
+        t_start = time.time()
 
         # 1. 准备session对象（创建/复用/重建会话）
         self._prepare_session(state)
@@ -99,11 +103,13 @@ class DialogueEngine:
         # 2. 创建新的对话轮次（turn）
         self._begin_turn(user_message, state)
 
+        diagnostics = {}
+
         # 3. 判断消息类型，分两条路处理
         # 3.1 文本消息类型 —— 需要调用 LLM 做意图识别和轨道路由
         if user_message.type is MessageType.TEXT:
             logger.info("处理文本消息: sender_id=%s, msg_id=%s", user_message.sender_id, user_message.message_id)
-            bot_msgs = await self._hand_text_msg(user_message,
+            bot_msgs, diag = await self._hand_text_msg(user_message,
                                                  state=state,
                                                  flow_list=self.task_handler.flow_list,
                                                  intents=self.knowledge_handler.knowledge_intents)
@@ -114,6 +120,8 @@ class DialogueEngine:
                         user_message.sender_id, user_message.object.type, user_message.object.id)
             state.set_focused_object(user_message.object)
             bot_msgs = await self._hand_obj_msg(user_message.object, state, self.task_handler.flow_list)
+            diag = {"track": "task", "message_type": "object",
+                    "object_type": user_message.object.type}
 
         # 4. 将机器人回复消息写入 pending_turn（当前轮次的暂存区）
         state.pending_turn.bot_messages = bot_msgs
@@ -121,11 +129,16 @@ class DialogueEngine:
         # 5. 提交 pending_turn —— 将暂存轮次归档到 session 的 turns 列表中
         state.commit_pending_turn()
 
-        # 6. 组装返回结果
+        # 6. 在线指标记录
+        elapsed = time.time() - t_start
+        await telemetry.record_request(elapsed)
+
+        # 7. 组装返回结果
         return ProcessResult(
             sender_id=user_message.sender_id,
             message_id=user_message.message_id,
             messages=bot_msgs,
+            diagnostics=diag,
         )
 
     def _prepare_session(self, state: DialogueState):
@@ -187,7 +200,7 @@ class DialogueEngine:
                              state: DialogueState,
                              flow_list: FlowsList,
                              intents: dict[str, KnowledgeIntent]
-                             ) -> list[BotMessage]:
+                             ) -> tuple[list[BotMessage], dict]:
         """
         处理文本类型消息 —— 完整的 LLM 规划 + 轨道路由流程
 
@@ -205,35 +218,72 @@ class DialogueEngine:
         :param state: 对话状态（含上下文历史）
         :param flow_list: 所有已注册的业务流程和系统流程
         :param intents: 已注册的知识查询意图字典
-        :return: 机器人回复消息列表
+        :return: (机器人回复消息列表, 诊断信息字典)
         """
+        diagnostics: dict = {}
 
         # 1. 调用 LLM 进行路由分析，得到规划结果 TurnPlan
         logger.debug("调用 LLM 进行意图规划...")
+
+        # 后台异步生成对话摘要（超过 5 轮时），不阻塞当前请求
+        asyncio.create_task(try_generate_summary(state))
+
         turn_plan = await self.planner.predict(user_message, state=state, flow_list=flow_list, intents=intents)
+
+        # 记录 TurnPlan 信息
+        tracks = turn_plan.activated_tracks()
+        diagnostics["predicted_tracks"] = tracks
+        if turn_plan.knowledge is not None:
+            diagnostics["knowledge_intents"] = turn_plan.knowledge.intents
+        if turn_plan.task is not None:
+            diagnostics["task_commands"] = [c.command for c in turn_plan.task.commands]
 
         # 2. 利用校验器校验 LLM 输出的 TurnPlan 是否合法
         validated = self.turn_plan_validator.validate(turn_plan, state, flow_list, intents)
+        diagnostics["validation_passed"] = validated.valid
+        if not validated.valid:
+            diagnostics["clarify_reason"] = validated.reason.value
+
         logger.debug("TurnPlan 校验结果: valid=%s, tracks=%s",
                      validated.valid, turn_plan.activated_tracks())
 
         # 3. 判断校验结果 —— 校验失败则走意图澄清
         if not validated.valid:
             logger.info("意图澄清: reason=%s, sender_id=%s", validated.reason.value, state.sender_id)
-            return await self.clarify_responder.respond(validated.reason, state)
+            await telemetry.record_clarify()
+            await telemetry.record_track("clarify")
+            return await self.clarify_responder.respond(validated.reason, state), diagnostics
 
         # 4. 校验通过，根据 TurnPlan 路由到对应的处理轨道
         if turn_plan.task is not None:
             logger.info("路由到 Task 轨道: sender_id=%s, commands=%s",
                         state.sender_id, [c.command for c in turn_plan.task.commands])
-            return await self.task_handler.hand(state, turn_plan.task.commands)
+            await telemetry.record_track("task")
+
+            # 记录流程启动和槽位
+            for cmd in turn_plan.task.commands:
+                if isinstance(cmd, StartedFlowCommand):
+                    await telemetry.record_flow_start(cmd.flow)
+                elif isinstance(cmd, SetSlotsCommand):
+                    diagnostics["slots_filled"] = cmd.slots
+                    for slot_name in cmd.slots:
+                        await telemetry.record_slot(True)
+
+            # 记录当前流程状态
+            if state.active_task is not None:
+                diagnostics["flow_name"] = state.active_task.flow_id
+                diagnostics["flow_step"] = state.active_task.step_id
+
+            return await self.task_handler.hand(state, turn_plan.task.commands), diagnostics
         elif turn_plan.knowledge is not None:
             logger.info("路由到 Knowledge 轨道: sender_id=%s, intents=%s",
                         state.sender_id, turn_plan.knowledge.intents)
-            return await self.knowledge_handler.hand(state, turn_plan.knowledge.intents)
+            await telemetry.record_track("knowledge")
+            return await self.knowledge_handler.hand(state, turn_plan.knowledge.intents), diagnostics
         else:
             logger.info("路由到 ChitChat 轨道: sender_id=%s", state.sender_id)
-            return await self.chitchat_handler.hand(state)
+            await telemetry.record_track("chitchat")
+            return await self.chitchat_handler.hand(state), diagnostics
 
     async def _hand_obj_msg(self,
                             obj_msg: FocusedObject,

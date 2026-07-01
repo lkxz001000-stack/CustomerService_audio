@@ -23,6 +23,7 @@ from audio_cs.api.dependencies import DialogueServiceDep
 from audio_cs.api.schemas import ChatRequest, ChatResponse, ChatBotMessage, ChatObject, ChatMessageResponse, SessionStateResponse
 from audio_cs.domain.messages import ProcessResult, UserMessage, MessageType, FocusedObject,ChatHistoryMessage
 from audio_cs.config.settings import settings
+from evaluation.telemetry import telemetry
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -77,8 +78,9 @@ async def chat_endpoint(chat_request: ChatRequest,
     # 3. 将领域数据模型转成接口数据模型
     chat_response = _build_chat_response(process_result)
 
-    logger.debug("回复消息: sender_id=%s, msg_count=%d",
-                 process_result.sender_id, len(process_result.messages))
+    logger.debug("回复消息: sender_id=%s, msg_count=%d, diag=%s",
+                 process_result.sender_id, len(process_result.messages),
+                 json.dumps(process_result.diagnostics or {}, ensure_ascii=False))
     return chat_response
 
 
@@ -133,7 +135,8 @@ def _build_chat_response(process_result: ProcessResult) -> ChatResponse:
                                      type=bot_message.object.type,
                                      title=bot_message.object.title,
                                      attributes=bot_message.object.attributes,
-                                 ) if bot_message.object else None) for bot_message in process_result.messages]
+                                 ) if bot_message.object else None) for bot_message in process_result.messages],
+        diagnostics=process_result.diagnostics,
     )
 
 
@@ -251,7 +254,8 @@ async def chat_stream_endpoint(chat_request: ChatRequest,
                 }
             }, ensure_ascii=False)
             yield f"data: {event_data}\n\n"
-        yield f"data: {json.dumps({'type': 'done', 'message_id': process_result.message_id})}\n\n"
+        diag = json.dumps(process_result.diagnostics or {}, ensure_ascii=False)
+        yield f"data: {json.dumps({'type': 'done', 'message_id': process_result.message_id, 'diagnostics': json.loads(diag)})}\n\n"
 
     return StreamingResponse(
         event_generator(),
@@ -262,3 +266,16 @@ async def chat_stream_endpoint(chat_request: ChatRequest,
             "X-Accel-Buffering": "no",
         }
     )
+
+
+@router.get("/api/telemetry")
+async def telemetry_endpoint():
+    """在线指标端点 —— 返回当前服务质量的实时快照。"""
+    return await telemetry.snapshot()
+
+
+@router.post("/api/telemetry/reset")
+async def telemetry_reset_endpoint():
+    """重置在线指标计数器。"""
+    await telemetry.reset()
+    return {"success": True}

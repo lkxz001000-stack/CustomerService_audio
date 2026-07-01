@@ -1,0 +1,13 @@
+参考信息：
+{% for chunk in knowledge_chunks %}
+- {{ chunk }}
+{% endfor %}
+
+系统回复：
+{{ bot_reply }}
+
+请逐句判断回复中的每个断言是否能在参考信息中找到支撑。
+如果找不到支撑，标记为"幻觉"。
+
+输出 JSON 数组：
+[{"statement": "回复中的一句完整断言", "supported": true/false, "evidence": "支撑该断言的参考信息原文（如无则填'无'）"}]
