@@ -139,7 +139,8 @@ class TurnPlanner:
 
         # ---- 知识检索意图清单：告知 LLM 系统支持哪些知识查询场景 ----
         knowledge_intents_json = json.dumps(
-            [{"id": intent.id, "description": intent.description} for intent in intents.values()],
+            [{"id": intent.id, "description": intent.description,
+              "requires_object": intent.requires_object} for intent in intents.values()],
             ensure_ascii=False
         )
 

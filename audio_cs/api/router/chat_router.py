@@ -24,6 +24,7 @@ from audio_cs.api.schemas import ChatRequest, ChatResponse, ChatBotMessage, Chat
 from audio_cs.domain.messages import ProcessResult, UserMessage, MessageType, FocusedObject,ChatHistoryMessage
 from audio_cs.config.settings import settings
 from evaluation.telemetry import telemetry
+from audio_cs.infrastructure import http_client
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -279,3 +280,34 @@ async def telemetry_reset_endpoint():
     """重置在线指标计数器。"""
     await telemetry.reset()
     return {"success": True}
+
+
+@router.get("/api/orders")
+async def orders_endpoint(sender_id: str):
+    """获取用户订单列表（代理 audio-data 接口）。
+
+    调用音频平台 GET /api/v1/orders 获取用户全部订单，
+    提取关键字段后返回给前端渲染订单卡片。
+    """
+    url = f"{settings.audio_api_base_url}/api/v1/orders"
+    headers = {"X-User-Id": sender_id}
+    params = {"pageSize": 100}
+    try:
+        response = await http_client.http_client.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        body = response.json()
+        orders = []
+        data = body.get("data", {}) if isinstance(body, dict) else {}
+        for item in data.get("list", []):
+            orders.append({
+                "order_no": item.get("orderNo", ""),
+                "order_id": item.get("orderId", ""),
+                "total_amount": item.get("totalAmount", ""),
+                "order_status": item.get("orderStatus", ""),
+                "created_at": item.get("createdAt", ""),
+                "paid_at": item.get("paidAt", ""),
+            })
+        return {"orders": orders}
+    except Exception as e:
+        logger.exception("获取订单列表失败: sender_id=%s, url=%s, error=%s", sender_id, url, e)
+        raise HTTPException(status_code=502, detail=f"获取订单列表失败: {e}")

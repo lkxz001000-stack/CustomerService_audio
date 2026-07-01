@@ -75,6 +75,8 @@ Knowledge 对象示例：
 允许的 intent（从下列选项中选择，可以选择一个或多个）：
 {{ knowledge_intents_json }}
 
+**重要**：若某个 intent 的 `requires_object` 不为 null，表示该意图需要用户先点击/选中对应的界面对象（如 album、order）。当前状态中若 `Focused Object` 为 null 或类型不匹配，则不能使用该意图——请选择 `requires_object` 为 null 的替代意图（如 `album_info` 要求聚焦 album → 用户没点击专辑时，无聚焦对象的文本查询应改用 `album_content_detail`）。
+
 ---
 
 ## Chitchat 结构

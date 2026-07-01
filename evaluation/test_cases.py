@@ -64,9 +64,9 @@ ROUTING_CASES = [
 
     # ---- 专辑/作品信息 → knowledge ----
     GoldenTestCase("r011", "routing", "专辑信息查询",
-        [GoldenTurn("《三体》这本书怎么样？", expected_track="knowledge", expected_intent="album_info")]),
+        [GoldenTurn("《三体》这本书怎么样？", expected_track="knowledge", expected_intent="album_content_detail")]),
     GoldenTestCase("r012", "routing", "作者查询",
-        [GoldenTurn("这本书的作者是谁？", expected_track="knowledge", expected_intent="album_info")]),
+        [GoldenTurn("这本书的作者是谁？", expected_track="clarify")]),
     GoldenTestCase("r013", "routing", "更新时间",
         [GoldenTurn("《斗罗大陆》什么时候更新？", expected_track="knowledge", expected_intent="album_info")]),
 
