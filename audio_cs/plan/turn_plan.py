@@ -105,7 +105,7 @@ class TurnPlan:
 
         用于校验器判断：列表为空 → MISSING_TRACK；列表长度 > 1 → MULTIPLE_TRACKS。
 
-        :return: 轨道名称字符串列表，如 ["task"]、["knowledge"]、["chichat"]
+        :return: 轨道名称字符串列表，如 ["task"]、["knowledge"]、["chitchat"]
         """
         tracks = []
 
@@ -114,7 +114,7 @@ class TurnPlan:
         if self.knowledge is not None:
             tracks.append("knowledge")
         if self.chitchat is not None:
-            tracks.append("chichat")
+            tracks.append("chitchat")
 
         return tracks
 

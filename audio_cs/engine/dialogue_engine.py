@@ -10,6 +10,7 @@
 """
 
 import logging
+import re
 import time
 import asyncio
 from typing import Any, Coroutine
@@ -31,6 +32,40 @@ from audio_cs.history.summarizer import try_generate_summary
 from evaluation.telemetry import telemetry
 
 logger = logging.getLogger(__name__)
+
+# 预过滤：纯语气词（1-2 字感叹词，无法承载业务意图）
+_UNROUTABLE_EXCLAMATION = re.compile(
+    r"^[嗯哦啊哎噢哈嗨嘿哟唔额咦嘛诶呵喔嘻嘿]{1,2}$"
+)
+
+# 预过滤：纯标点空白，不含任何字母/数字/中文/日文等文字字符
+_UNROUTABLE_PUNCTUATION = re.compile(
+    r"^[\s"
+    r"!\"#\$%&'\(\)\*\+,-\./:;<=>\?@\[\\\]\^_`\{\|}~"  # ASCII 标点
+    r"¡-¿"         # ¡-¿ Latin-1 标点
+    r"‐-‧"         # ‐-‧ 破折号、引号、省略号
+    r"‰-⁞"         # ‰-⁞ 千分号等
+    r"　-〿"         # 　-〿 CJK 标点（。、，！？等）
+    r"！-／"         # ！-／ 全角英文标点
+    r"：-＠"         # ：-＠ 全角符号
+    r"［-｀"         # ［-｀ 全角括号
+    r"｛-･"         # ｛-･ 全角括号
+    r"]+$"
+)
+
+
+def _is_unroutable(text: str | None) -> bool:
+    """判断输入是否明显无法承载意图，可直接走 clarify 而不调用 LLM。"""
+    if not text:
+        return True
+    stripped = text.strip()
+    if not stripped:
+        return True
+    if _UNROUTABLE_EXCLAMATION.match(stripped):
+        return True
+    if _UNROUTABLE_PUNCTUATION.match(stripped):
+        return True
+    return False
 
 
 class DialogueEngine:
@@ -221,6 +256,17 @@ class DialogueEngine:
         :return: (机器人回复消息列表, 诊断信息字典)
         """
         diagnostics: dict = {}
+
+        # 0. 预过滤：输入明显无法承载意图时直接走澄清，跳过 LLM
+        if _is_unroutable(user_message.text):
+            logger.info("预过滤触发澄清: sender_id=%s, text=%s",
+                        state.sender_id, repr(user_message.text))
+            await telemetry.record_clarify()
+            await telemetry.record_track("clarify")
+            diagnostics["validation_passed"] = False
+            diagnostics["clarify_reason"] = "prefilter_unroutable"
+            diagnostics["predicted_tracks"] = []
+            return await self.clarify_responder.respond(ClarifyReason.MISSING_TRACK, state), diagnostics
 
         # 1. 调用 LLM 进行路由分析，得到规划结果 TurnPlan
         logger.debug("调用 LLM 进行意图规划...")
