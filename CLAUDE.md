@@ -46,17 +46,6 @@ uv run python -m evaluation.regression_check
 curl http://localhost:18082/api/telemetry | python -m json.tool
 ```
 
-`.env` 配置项（项目根目录）：
-```
-LLM_MODEL=qwen-plus
-LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
-LLM_API_KEY=sk-...
-AUDIO_API_BASE_URL=http://localhost:8000
-DATABASE_URL=mysql+aiomysql://root:<PASSWORD>@<HOST>:3306/audio_cs?charset=utf8mb4
-APP_HOST=0.0.0.0
-APP_PORT=18082
-```
-
 `test_log/` 目录为测试日志输出（已加入 .gitignore）。测试脚本 `test_log/run_tests.py` 为独立异步脚本（非 pytest），使用 httpx 调用本地 API，每次运行自动生成 `.log` 和 `.json` 两种格式报告。测试用例按分类组织：健康检查、闲聊场景、业务流程、知识查询、多轮对话、边界情况、历史记录。
 
 ## 架构
